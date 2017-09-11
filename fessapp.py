@@ -11,8 +11,8 @@ heroes = [
 ]
 
 @app.route('/')
-def index(heroes):
-    return render_template('index.html', heroes=heores)
+def index():
+    return render_template('index.html', heroes=heroes)
 
 if __name__=='__main__':
     app.run(debug=True)
