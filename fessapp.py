@@ -14,5 +14,17 @@ heroes = [
 def index():
     return render_template('index.html', heroes=heroes)
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    return render_template('register.html')
+
+@app.route('/unregister', methods=['GET', 'POST'])
+def unregister():
+    return render_template('unregister.html')
+
+@app.route('/hm')
+def hm():
+    return redirect(url_for('index'))
+
 if __name__=='__main__':
     app.run(debug=True)
