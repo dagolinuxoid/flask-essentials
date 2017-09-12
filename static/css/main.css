@@ -1,0 +1,54 @@
+/* main.css file */
+html, body, ul {
+  margin: 0;
+  padding: 0;  
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.main-menu {
+  list-style: none;
+  border-bottom: 3px solid black;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.main-menu__item {
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
+
+.hero-lst__heroinfo {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form {
+  border: 1px solid #000;
+  width: 250px;
+  margin-left: 20px;
+  padding: 5px;
+}
+
+legend {
+  margin-bottom: 5px;
+  background-color: cornflowerblue;
+  padding: 3px;
+  color: #fff;
+}
+
+input {
+  margin-bottom: 5px;
+}
+
+.blck {
+  display: block;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
