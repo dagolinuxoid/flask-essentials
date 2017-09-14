@@ -4,10 +4,13 @@
 <h1>10 best practices for designing user-friendly forms</h1>
 <form action="{{url_for('register')}}" method="post">
   <legend>Enter a name of the hero and describe it using one word</legend>
+
   <label for="hero_name">Name</label>
   <input type="text" name="hero_name" id="hero_name" required placeholder="Juggernaut">
+
   <label for="hero_descr">Description</label>
-  <input type="text" name=hero_descr"" id="hero_descr" required placeholder="blademaster">
+  <input type="text" name="hero_descr" id="hero_descr" required placeholder="blademaster">
+
   <input type="submit" value="send" class="blck">
 </form>
 {% endblock %}
