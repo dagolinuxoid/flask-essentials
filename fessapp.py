@@ -5,6 +5,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    with sql.connect('herodata.db') as conn:
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM hero_dashboard')
+        heroes = cur.fetchall()
     return render_template('index.html', heroes=heroes)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -12,7 +16,7 @@ def register():
     if request.method == 'GET':
         return render_template('register.html')
     # if request.method == 'POST':
-    if request.method.get('hero_name') !='' and request.method.get('hero_descr') !='':
+    if request.form.get('hero_name') !='' and request.form.get('hero_descr') !='':
         with sql.connect('herodata.db') as conn:
             cur = conn.cursor()
             # add hero's info into a database
