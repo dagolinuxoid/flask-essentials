@@ -4,7 +4,7 @@
   {% block main %}
   <ul class="hero-lst">
     {% for hero in heroes %}
-    <li class="hero-lst__heroinfo">{{hero.name}} | {{hero['description']}}</li>
+    <li class="hero-lst__heroinfo">{{hero[1]}} | {{hero[2]}}</li>
     {% endfor %}
   </ul>
   {% endblock %}
