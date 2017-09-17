@@ -1,14 +1,7 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, request
+import sqlite3 as sql
 
 app = Flask(__name__)
-
-heroes = [
-    {'name':'juggernaut', 'description':'agility'},
-    {'name':'mortred', 'description':'agility'},
-    {'name':'skeleton king', 'description': 'strength'},
-    {'name':'maigna', 'description':'agility'},
-    {'name':'faceless void', 'description':'agility'}
-]
 
 @app.route('/')
 def index():
@@ -16,7 +9,17 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html')
+    if request.method == 'GET':
+        return render_template('register.html')
+    # if request.method == 'POST':
+    if request.method.get('hero_name') !='' and request.method.get('hero_descr') !='':
+        with sql.connect('herodata.db') as conn:
+            cur = conn.cursor()
+            # add hero's info into a database
+            cur.execute('INSERT INTO hero_dashboard (hero_name, hero_descr) VALUES(?,?)',
+                        (request.form['hero_name'], request.form.get('hero_descr')))
+            conn.commit()
+        return 'So hero — {} and description — {}|was added to db'.format(request.form['hero_name'], request.form.get('hero_descr'))
 
 @app.route('/unregister', methods=['GET', 'POST'])
 def unregister():
