@@ -27,7 +27,20 @@ def register():
 
 @app.route('/unregister', methods=['GET', 'POST'])
 def unregister():
-    return render_template('unregister.html')
+    if request.method == 'GET':
+        # don't do this :)
+        conn = sql.connect('herodata.db')
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM hero_dashboard')
+        heroes = cur.fetchall()
+        conn.close()
+        return render_template('unregister.html', heroes = heroes)
+    if request.form.get('id'):
+        with sql.connect('herodata.db') as conn:
+            cur = conn.cursor()
+            cur.execute('DELETE FROM hero_dashboard WHERE id=?', (request.form.get('id')))
+            conn.commit()
+        return 'Something has been deleted'
 
 @app.route('/hm')
 def hm():
