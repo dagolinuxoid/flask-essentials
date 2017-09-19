@@ -42,9 +42,17 @@ def unregister():
             conn.commit()
         return 'Something has been deleted'
 
-@app.route('/hm')
-def hm():
-    return redirect(url_for('index'))
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        if request.form.get('name') != 'admin' or request.form.get('password') != 'admin':
+            error = 'Invalid credentials. Please try again.'
+            return render_template('login.html', error = error)
+        # else:
+        return redirect(url_for('index'))
+    # if GET method had been used
+    # error = None
+    return render_template('login.html')
 
 if __name__=='__main__':
     app.run(debug=True)
