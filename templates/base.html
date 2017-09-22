@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}base doc{% endblock %}</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+</head>
+<body>
+  <nav class="navigation-bar">
+    <ul class="main-menu">
+      <li class="main-menu__item"><a href="{{url_for('index')}}" class="registrants">home page</a></li>
+      <li class="main-menu__item"><a href="{{url_for('register')}}" class="register">-rw-rw-rw- page</a></li>
+      <li class="main-menu__item"><a href="{{url_for('unregister')}}" class="unregister">-rw------- page</a></li>
+      <li class="main-menu__item"><a href="{{url_for('login')}}">Log in</a></li>
+      <li class="main-menu__item"><a href="{{url_for('logout')}}">Log out</a></li>
+    </ul>
+  </nav>
+  {% block main %}{% endblock %}
+</body>
+</html>
