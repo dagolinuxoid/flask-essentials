@@ -33,6 +33,10 @@ def register():
 
 @app.route('/unregister', methods=['GET', 'POST'])
 def unregister():
+    # block an access to the private page based on session info
+    if not session.get('user'):
+        return redirect(url_for('index'))
+
     if request.method == 'GET':
         # don't do this :)
         conn = sql.connect('herodata.db')
