@@ -1,1 +1,1 @@
-# this is a simple flask-based  web app
+# this is a simple (and ridiculiously ugly) flask-based  web app
