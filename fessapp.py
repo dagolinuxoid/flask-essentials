@@ -1,15 +1,21 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, session
 import sqlite3 as sql
+import os
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 @app.route('/')
 def index():
+    # more robust than just session["user"] — it prevents from a werkzeug keyError
+    status='you are NOT logged in'
+    if session.get('user'):
+        status='you are logged in!!'
     with sql.connect('herodata.db') as conn:
         cur = conn.cursor()
         cur.execute('SELECT * FROM hero_dashboard')
         heroes = cur.fetchall()
-    return render_template('index.html', heroes=heroes)
+    return render_template('index.html', heroes=heroes, status=status)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -46,9 +52,10 @@ def unregister():
 def login():
     if request.method == 'POST':
         if request.form.get('name') != 'admin' or request.form.get('password') != 'admin':
-            error = 'Invalid credentials. Please try again.'
+            error = 'Invalid credentials. I bet — You did a typo | Try again'
             return render_template('login.html', error = error)
         # else:
+        session['user'] = request.form.get('name')
         return redirect(url_for('index'))
     # if GET method had been used
     # error = None
